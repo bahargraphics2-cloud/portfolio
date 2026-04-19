@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Georgia", serif;
+  --font-sans: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  
+  --color-brand-yellow: #F5C518;
+  --color-brand-dark: #0A0A0A;
+  
+  --animate-grain: grain 8s steps(10) infinite;
+}
+
+@layer base {
+  body {
+    @apply bg-brand-dark text-white font-sans selection:bg-brand-yellow selection:text-brand-dark;
+    overflow-x: hidden;
+  }
+}
+
+@layer components {
+  .grain-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  .glass-nav {
+    @apply bg-brand-dark/90 backdrop-blur-sm border-b border-white/10;
+  }
+
+  .text-luxury {
+    @apply font-display tracking-tight;
+  }
+
+  .editorial-label {
+    @apply text-[10px] uppercase tracking-[0.2em] font-bold opacity-70;
+  }
+
+  .btn-pill {
+    @apply px-7 py-3 rounded-full font-bold text-xs uppercase tracking-widest transition-all duration-300 active:scale-95;
+  }
+
+  .btn-yellow {
+    @apply bg-brand-yellow text-brand-dark hover:brightness-110;
+  }
+
+  .btn-outline {
+    @apply border border-brand-yellow text-brand-yellow hover:bg-brand-yellow hover:text-brand-dark;
+  }
+
+  .card-editorial {
+    @apply bg-white/[0.03] border-l-2 border-brand-yellow p-6 transition-all duration-300;
+  }
+
+  .section-divider {
+    @apply border-t border-brand-yellow/20 pt-8;
+  }
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-5%, -10%); }
+  20% { transform: translate(-15%, 5%); }
+  30% { transform: translate(7%, -25%); }
+  40% { transform: translate(-5%, 25%); }
+  50% { transform: translate(-15%, 10%); }
+  60% { transform: translate(15%, 0%); }
+  70% { transform: translate(0%, 15%); }
+  80% { transform: translate(3%, 35%); }
+  90% { transform: translate(-10%, 10%); }
+}
+
+.mask-fade-bottom {
+  mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+}
+
